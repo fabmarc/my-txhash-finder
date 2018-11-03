@@ -1,16 +1,28 @@
 import React from 'react';
 import BottomBar from './components/BottomBar';
 import BarCodeReader from './components/BarCodeReader';
-import { StyleSheet, View, LayoutAnimation, Text } from 'react-native';
+import { StyleSheet, View, LayoutAnimation } from 'react-native';
 
 export default class App extends React.Component {
 
-  state = {}
+  state = {
+    scannedTxHash: null,
+  }
 
   handleBarCodeScanned = ({ data }) => {
+    const { scannedTxHash } = this.state;
+    if (data === scannedTxHash) return;
     LayoutAnimation.spring();
     this.setState({ scannedTxHash: data });
   }
+
+  handleTextPress = (text) => {
+    alert(text);
+  };
+
+  handleCancel = () => {
+    this.setState({ scannedTxHash: null });
+  };
 
   render() {
     const { scannedTxHash } = this.state;
@@ -19,7 +31,11 @@ export default class App extends React.Component {
         <BarCodeReader
           onBarCodeScanned={this.handleBarCodeScanned}
         />
-        <BottomBar text={scannedTxHash} />
+        <BottomBar
+          onTextPress={this.handleTextPress}
+          onCancel={this.handleCancel}
+          text={scannedTxHash}
+        />
       </View>
     );
   }
