@@ -19,8 +19,9 @@ export default class BarCodeReader extends React.Component {
     });
   };
 
-  handleBarCodeScanned = ({ type, data }) => {
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+  handleBarCodeScanned = (result) => {
+    const { onBarCodeScanned } = this.props;
+    if (onBarCodeScanned) onBarCodeScanned(result)
   }
 
   render = () => {

@@ -1,13 +1,33 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
 import BarCodeReader from './components/BarCodeReader';
+import { StyleSheet, View, LayoutAnimation, Text } from 'react-native';
 
 export default class App extends React.Component {
+
+  state = {}
+
+  handleBarCodeScanned = ({ data }) => {
+    LayoutAnimation.spring();
+    this.setState({ scannedTxHash: data });
+  }
+
+  renderTxHash = () => {
+    const { scannedTxHash } = this.state;
+    if (!scannedTxHash) return;
+    return (
+      <Text numberOfLines={1}>
+        {scannedTxHash}
+      </Text>
+    );
+  };
 
   render() {
     return (
       <View style={styles.container}>
-        <BarCodeReader />
+        <BarCodeReader
+          onBarCodeScanned={this.handleBarCodeScanned}
+        />
+        {this.renderTxHash()}
       </View>
     );
   }
