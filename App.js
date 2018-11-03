@@ -1,4 +1,5 @@
 import React from 'react';
+import BottomBar from './components/BottomBar';
 import BarCodeReader from './components/BarCodeReader';
 import { StyleSheet, View, LayoutAnimation, Text } from 'react-native';
 
@@ -11,23 +12,14 @@ export default class App extends React.Component {
     this.setState({ scannedTxHash: data });
   }
 
-  renderTxHash = () => {
-    const { scannedTxHash } = this.state;
-    if (!scannedTxHash) return;
-    return (
-      <Text numberOfLines={1}>
-        {scannedTxHash}
-      </Text>
-    );
-  };
-
   render() {
+    const { scannedTxHash } = this.state;
     return (
       <View style={styles.container}>
         <BarCodeReader
           onBarCodeScanned={this.handleBarCodeScanned}
         />
-        {this.renderTxHash()}
+        <BottomBar text={scannedTxHash} />
       </View>
     );
   }
