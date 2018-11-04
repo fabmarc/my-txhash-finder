@@ -41,6 +41,9 @@ function request(method, url, payload = {}) {
       const { error, input } = json;
       if (error) return Promise.reject(error.message);
       return Promise.resolve(input);
+    })
+    .catch((error) => {
+      return Promise.reject(error.message);
     });
 }
 
