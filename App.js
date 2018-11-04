@@ -3,6 +3,7 @@ import { StyleSheet, View, Alert } from 'react-native';
 import BarCodeReader from './components/BarCodeReader';
 import BottomBar from './components/BottomBar';
 import Transaction from './models/Transaction';
+import hex2a from './utils/hex2a';
 
 export default class App extends React.Component {
 
@@ -16,14 +17,15 @@ export default class App extends React.Component {
     this.setState({ scannedTxHash: data });
   }
 
-  showMessage(message) {
-    if (!message) {
+  showMessage(hexMessage) {
+    if (!hexMessage) {
       Alert.alert('No Transaction message found.');
       return;
     }
+    if (hexMessage.startsWith('0x')) hexMessage = hexMessage.substr(2);
     Alert.alert(
       'Transaction message:',
-      message,
+      hex2a(hexMessage),
     );
   }
 
