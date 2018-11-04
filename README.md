@@ -6,6 +6,7 @@ Etherum Blockchain. Then it displays the message that is recorded in the Transac
 To run the app you need to install npm, NodeJS and Expo CLI.
 
 Install Expo CLI: ```npm install expo-cli --global```
+
 Also install Expo CLI on your Android/iOS (See ```https://docs.expo.io/versions/v31.0.0/introduction/installation```).
 
 # Commands
