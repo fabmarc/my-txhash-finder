@@ -1,7 +1,11 @@
+import config from '../config';
+
+const { endpointHost } = config;
+
 export default class Transaction {
 
   static find(txhash) {
-    return fetch(`http://api.ethplorer.io/getTxInfo/${txhash}?apiKey=freekey`)
+    return fetch(`${endpointHost}/getTxInfo/${txhash}?apiKey=freekey`)
       .then((response) => response.json())
       .then((json) => {
         const { error, input } = json;
